@@ -1,17 +1,20 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-export default function AddItemPage() {
-  const [productkey, setProductkey] = useState("");
-  const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState(0);
-  const [productCategory, setProductCategory] = useState("audio");
-  const [productDimention, setProductDimention] = useState("");
-  const [productDescription, setProductDescription] = useState("");
+export default function UpdateItemPage() {
+  const location=useLocation();
+  const [productkey, setProductkey] = useState(location.state.key);
+  const [productName, setProductName] = useState(location.state.name);
+  const [productPrice, setProductPrice] = useState(location.state.price);
+  const [productCategory, setProductCategory] = useState(location.state.category);
+  const [productDimention, setProductDimention] = useState(location.state.dimention);
+  const [productDescription, setProductDescription] = useState(location.state.description);
   const navigate=useNavigate();
+  
 
+console.log(location)
 
     async function handleAddItem(){
         console.log(productkey,productName,productPrice,productCategory,productDimention,productDescription)
@@ -22,8 +25,8 @@ export default function AddItemPage() {
             try{
 
             
-            const result=await axios.post("http://localhost:3000/api/products",{
-                key:productkey,
+            const result=await axios.put("http://localhost:3000/api/products/"+productkey,{
+                
                 name:productName,
                 price:productPrice,
                 category:productCategory,
@@ -49,10 +52,11 @@ export default function AddItemPage() {
 
   return (
     <div className="w-full h-full flex items-center flex-col p-6">
-      <h1 className="text-2xl font-bold mb-4">Add Items</h1>
+      <h1 className="text-2xl font-bold mb-4">Update Items</h1>
       <div className="w-[400px] border p-4 flex flex-col items-center rounded-lg shadow-md bg-white">
         
         <input
+          disabled
           onChange={(e) => setProductkey(e.target.value)}
           value={productkey}
           type="text"
@@ -102,7 +106,8 @@ export default function AddItemPage() {
         />
 
         <button onClick={handleAddItem} className="bg-blue-500 w-full text-white  p-2 rounded-md mt-2 hover:bg-blue-600">
-          Add
+          
+          Update
         </button>
 
         <button onClick={()=>{navigate("/admin/item")}} className="bg-red-500 w-full text-white  p-2 rounded-md mt-2 hover:bg-red-600">

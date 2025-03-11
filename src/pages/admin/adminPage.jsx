@@ -4,8 +4,9 @@ import { MdOutlineSpeaker } from "react-icons/md";
 import { FaRegUser } from "react-icons/fa";
 import {  Routes ,Route, Link} from "react-router-dom";
 import AdminItemsPage from "./adminItemPage";
-import AddProductPage from "./addItemPage";
 import AddItemPage from "./addItemPage";
+
+import UpdateItemPage from "./updateItemPage";
 
 
 export default function AdminPage(){
@@ -41,6 +42,7 @@ export default function AdminPage(){
                 <Route path="/booking" element={<h1>Booking</h1>}/> 
                 <Route path="/item" element={<AdminItemsPage/>}/>
                 <Route path="/item/add" element={<AddItemPage/>}/>
+                <Route path="/item/update" element={<UpdateItemPage/>}/>
 
 
 
