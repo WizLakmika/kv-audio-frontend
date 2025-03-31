@@ -74,7 +74,7 @@ export default function AdminItemsPage() {
                                     <td className="p-3">{product.name}</td>
                                     <td className="p-3 text-center">${product.price.toFixed(2)}</td>
                                     <td className="p-3 text-center">{product.category}</td>
-                                    <td className="p-3 text-center">{product.dimension}</td>
+                                    <td className="p-3 text-center">{product.dimention}</td>
                                     <td className={`p-3 text-center font-semibold ${product.availability ? "text-green-600" : "text-red-600"}`}>
                                         {product.availability ? "Available" : "Not Available"}
                                     </td>
