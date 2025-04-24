@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
+import mediaUpload from "../../utils/mediaUpload";
 
 export default function UpdateItemPage() {
   const location=useLocation();
@@ -11,12 +12,31 @@ export default function UpdateItemPage() {
   const [productCategory, setProductCategory] = useState(location.state.category);
   const [productDimention, setProductDimention] = useState(location.state.dimention);
   const [productDescription, setProductDescription] = useState(location.state.description);
+  const [productImages,setProductImages]=useState([]);
   const navigate=useNavigate();
   
 
 console.log(location)
 
-    async function handleAddItem(){
+    async function handleUpdateItem(){
+
+      let updatingImages=location.state.image
+
+        if(productImages.length>0){
+          const promises=[];
+
+          for(let i=0;i<productImages.length;i++){
+            const promise=mediaUpload(productImages[i]);
+            promises.push(promise)
+            if(i==5){
+              toast.error("You can only upload 5 images at a time");
+              break;
+            }
+          }
+
+          updatingImages=await Promise.all(promises)
+      }
+
         console.log(productkey,productName,productPrice,productCategory,productDimention,productDescription)
         const token=localStorage.getItem("token");
         
@@ -31,7 +51,8 @@ console.log(location)
                 price:productPrice,
                 category:productCategory,
                 dimention:productDimention,
-                description:productDescription
+                description:productDescription,
+                image:updatingImages
             },{
                 headers:{
                     Authorization:"Bearer "+ token
@@ -105,7 +126,16 @@ console.log(location)
           className="border p-2 w-full rounded-md mb-2"
         />
 
-        <button onClick={handleAddItem} className="bg-blue-500 w-full text-white  p-2 rounded-md mt-2 hover:bg-blue-600">
+        <input
+          type="file"
+          multiple
+          onChange={(e)=>{
+            setProductImages(e.target.files);
+          }}
+          className="w-full p-2 border rounded"
+        />
+
+        <button onClick={handleUpdateItem} className="bg-blue-500 w-full text-white  p-2 rounded-md mt-2 hover:bg-blue-600">
           
           Update
         </button>

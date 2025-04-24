@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function ProductCard({ item }) {
     return (
       <div className="w-80 bg-white shadow-md rounded-2xl p-4 m-4 hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
@@ -31,12 +33,12 @@ export default function ProductCard({ item }) {
   
         {/* View Details Button */}
         <div className="mt-4">
-          <button
+          <Link to ={"/product/"+item.key}
             className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-all duration-200"
-            onClick={() => alert(`Viewing details for: ${item.name}`)} // You can replace this with navigation
+           
           >
             View Details
-          </button>
+          </Link>
         </div>
       </div>
     );

@@ -119,7 +119,7 @@ export default function AddItemPage() {
 
         <input type="file" multiple onChange={(e)=>{
                setProductImages(e.target.files)
-        }} className="w-full p-2 rounded"/>
+        }} className="w-full p-2 border rounded"/>
 
         <button onClick={handleAddItem} className="bg-blue-500 w-full text-white  p-2 rounded-md mt-2 hover:bg-blue-600">
           Add
