@@ -32,10 +32,10 @@ export default function ProductOverview(){
             }
             {
                 loadingStatus=="loaded" && <div className="w-full h-full flex justify-center items-center">
-                    <div className="w-[49%] h-full bg-yellow-300">
+                    <div className="w-[49%] h-full ">
                         <ImageSlider images={product.image}/>
                     </div>
-                    <div className="w-[49%] h-full bg-green-300 flex flex-col items-center">
+                    <div className="w-[49%] h-full  flex flex-col items-center">
                         <h1 className="text-3xl font-bold text-accent">{product.name}</h1>
                         <h1 className="text-2xl font-semibold text-gray-600">{product.category}</h1>
                         <p className="text-gray-700 mt-4">{product.description}</p>
@@ -46,6 +46,12 @@ export default function ProductOverview(){
                     </div>
 
 
+                    </div>
+            }
+            {
+                loadingStatus=="error" && <div className="w-full h-full flex justify-center items-center">
+
+                    <h1 className="text-3xl font-bold text-accent">Error Occured</h1>
                     </div>
             }
         </div>
